@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm -rf /srv/obs
+mkdir -p /srv/obs/worker/root_1
+mkdir -p /srv/obs/run/worker/{boot,1}
+cd /srv/obs/run/worker/boot
+echo $OBS_IP $OBS_SERVER >> /etc/hosts
+curl -s "http://$OBS_SERVER:5252/getworkercode" | cpio --quiet --extract
+ln -s . XML
+
+exec /usr/bin/perl -w ./bs_worker --hardstatus --port $OBS_PORT --root /srv/obs/worker/root_1 --statedir /srv/obs/run/worker/1 --id `hostname`:1 --reposerver http://$OBS_SERVER:5252 --jobs $OBS_JOBS
