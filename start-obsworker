@@ -10,7 +10,7 @@ ln -s . XML
 
 if [ ! -z $OBS_TMPFS ]
 then
-    extra_args=--vmdisk-rootsize $OBS_TMPFS --tmpfs
+    extra_args="--vmdisk-rootsize $OBS_TMPFS --tmpfs"
 fi
 
 exec /usr/bin/perl -w ./bs_worker --hardstatus --port $OBS_PORT --root /srv/obs/worker/root_1 --statedir /srv/obs/run/worker/1 --id `hostname`:1 --reposerver http://$OBS_SERVER:5252 --jobs $OBS_JOBS $extra_args
