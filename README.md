@@ -7,10 +7,14 @@ rather complicated init script, which is hereby replaced with a script,
 .. is done via environment variables (or file), e.g.:
 
 obsworker.env
-> OBS_SERVER="obs"
-> OBS_IP="192.168.1.6"
+> OBS_SERVER=obs
+> OBS_IP=192.168.1.6
 > OBS_JOBS=8
 > OBS_PORT=12345
+
+watch out for trailing whitespaces!
+
+if you set OBS_TMPFS=8000, an 8G tmpfs mount will be used for builds
 
 Note, that OBS master must be able to connect to the worker instance on given
 OBS_PORT, and the OBS_PORT must match what is given in -p 
